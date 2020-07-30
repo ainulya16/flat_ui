@@ -4,7 +4,7 @@ class Bounce extends StatefulWidget {
   final Widget child;
   final Function onTap;
   
-  Bounce({key: Key, @required this.child, this.onTap}) : super(key:key);
+  Bounce({ @required this.child, this.onTap});
   @override
   _BounceState createState() => _BounceState();
 }
@@ -40,6 +40,7 @@ class _BounceState extends State<Bounce> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _scale = 1 - _controller.value;
     return GestureDetector(
       onTap: widget.onTap,
       onTapDown: (TapDownDetails detail) => _controller.forward(),
