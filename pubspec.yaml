@@ -1,8 +1,8 @@
 name: flat_ui
-description: A new Flutter package project.
+description: Flat UI.
 version: 0.0.1
-author:
-homepage:
+author: Ainul Yaqin <ainulyaqinmuntako@gmail.com>
+homepage: https://github.com/ainulya16/flat_ui
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
