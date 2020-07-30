@@ -10,7 +10,7 @@ enum FlatUIButtonSize {
 
 class FlatUIButton extends StatelessWidget {
   final Widget child;
-  final String text, color;
+  final String text, color, textColor;
   final Function onPress;
   final FlatUIButtonSize size;
   final double width, height, borderRadius;
@@ -19,7 +19,8 @@ class FlatUIButton extends StatelessWidget {
   FlatUIButton({
     this.child,
     @required this.text,
-    this.color,
+    this.color='#FFFFFF',
+    this.textColor='#FFFFFF',
     this.shadow=true,
     this.onPress,
     this.size,
@@ -49,7 +50,7 @@ class FlatUIButton extends StatelessWidget {
           ] : null,
         ),
         child: Center(
-          child: child != null ? child : Text(text, style: TextStyle()),
+          child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: HexColor(textColor))),
         ),
       ),
     );

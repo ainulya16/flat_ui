@@ -43,6 +43,7 @@ class _BounceState extends State<Bounce> with SingleTickerProviderStateMixin {
     _scale = 1 - _controller.value;
     return GestureDetector(
       onTap: widget.onTap,
+      onTapCancel: () => _controller.reverse(),
       onTapDown: (TapDownDetails detail) => _controller.forward(),
       onTapUp: (TapUpDetails detail) => _controller.reverse(),
       child: Transform.scale(scale: _scale, child: widget.child,)
