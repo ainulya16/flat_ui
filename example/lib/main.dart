@@ -80,7 +80,35 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            FlatUIButton(
+            Button(
+              size: ButtonSize.small,
+              shadow: true,
+              color: '#3498db',
+              text: 'INCREMENT',
+              onPress: _incrementCounter,
+            ),
+            Button(
+              size: ButtonSize.medium,
+              shadow: true,
+              color: '#3498db',
+              text: 'INCREMENT',
+              disabled: true,
+              onPress: _incrementCounter,
+            ),
+            Button(
+              size: ButtonSize.large,
+              color: '#3498db',
+              text: 'INCREMENT',
+              onPress: _incrementCounter,
+            ),
+            Button(
+              shadow: true,
+              color: '#3498db',
+              text: 'INCREMENT',
+              onPress: _incrementCounter,
+            ),
+            Button(
+              size: ButtonSize.full,
               color: '#3498db',
               text: 'INCREMENT',
               onPress: _incrementCounter,
@@ -88,11 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
