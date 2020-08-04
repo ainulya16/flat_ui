@@ -1,8 +1,8 @@
 import 'package:flat_ui/flat_ui.dart';
+import 'package:flat_ui/types/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-enum FUITextFieldBorderType { underline, bordered, none }
 
 class FUITextField extends StatelessWidget {
   final bool autofocus;
@@ -23,19 +23,20 @@ class FUITextField extends StatelessWidget {
   final String focusedBorderColor;
   final String disabledBorderColor;
   final bool allowNextFocus;
-  final FUITextFieldBorderType borderType;
+  final FUIFieldBorderType borderType;
   final TextInputType keyboardType;
   final double borderRadius;
   final dynamic prefix;
   final Widget suffixIcon;
   final FloatingLabelBehavior floatingLabelBehavior;
+  final Function onTap;
   FUITextField({
       this.autofocus=false,
       this.enabled=true,
       this.initialValue,
       this.inputFormatters,
       this.obsecureText=false,
-      this.borderType=FUITextFieldBorderType.none,
+      this.borderType=FUIFieldBorderType.none,
       this.borderRadius=10,
       this.borderColor='#3498db',
       this.errorBorderColor='#e74c3c',
@@ -53,6 +54,7 @@ class FUITextField extends StatelessWidget {
       this.prefix,
       this.suffixIcon,
       this.floatingLabelBehavior,
+      this.onTap,
       this.allowNextFocus = false});
 
   @override
@@ -64,12 +66,12 @@ class FUITextField extends StatelessWidget {
     BorderSide disabledBorderSide = BorderSide(color: HexColor(disabledBorderColor));
     Widget prefixIcon;
     switch (borderType) {
-      case FUITextFieldBorderType.underline:
+      case FUIFieldBorderType.underline:
         inputBorder = UnderlineInputBorder(
           borderSide: borderSide
         );
         break;
-      case FUITextFieldBorderType.bordered:
+      case FUIFieldBorderType.bordered:
         inputBorder = OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
           borderSide: borderSide
@@ -83,6 +85,7 @@ class FUITextField extends StatelessWidget {
       prefixIcon = SizedBox(child: Center(child: Text(prefix, style: TextStyle(fontSize: 18),),),);
     }
     return TextFormField(
+      onTap: onTap,
       autofocus: autofocus,
       enabled: enabled,
       initialValue: initialValue,

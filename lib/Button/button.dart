@@ -1,4 +1,3 @@
-import 'package:flat_ui/Styles/BoxShadow.dart';
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -70,27 +69,29 @@ class FUIButton extends StatelessWidget {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 200),
       opacity: disabled ? 0.6 : 1.0,
-      child: Bounce(
+      child: FUIAnimationBounce(
         useOpacity: true,
         disabled: disabled,
-        onTap: onPress,
-        child:Container(
-          margin: size == ButtonSize.full ? EdgeInsets.all(0) : EdgeInsets.fromLTRB(10,20,10,20),
-          height: (size == ButtonSize.block || size == ButtonSize.full) ? 55 : height,
-          width: width,
-          padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
-          decoration: BoxDecoration(
-            color: HexColor(color),
-            borderRadius: BorderRadius.circular(borderRadius),
-            boxShadow: shadow ? [
-              boxShadow
-            ] : null,
-          ),
-          child: (size == ButtonSize.block || size == ButtonSize.full) ? Center(
-            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
-          ) :
-          Container(
-            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
+        child:GestureDetector(
+          onTap: onPress,
+          child: Container(
+            margin: size == ButtonSize.full ? EdgeInsets.all(0) : EdgeInsets.fromLTRB(10,20,10,20),
+            height: (size == ButtonSize.block || size == ButtonSize.full) ? 55 : height,
+            width: width,
+            padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
+            decoration: BoxDecoration(
+              color: HexColor(color),
+              borderRadius: BorderRadius.circular(borderRadius),
+              boxShadow: shadow ? [
+                boxShadow
+              ] : null,
+            ),
+            child: (size == ButtonSize.block || size == ButtonSize.full) ? Center(
+              child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
+            ) :
+            Container(
+              child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
+            ),
           ),
         ),
       ),

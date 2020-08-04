@@ -1,0 +1,1 @@
+enum FUIFieldBorderType { underline, bordered, none }

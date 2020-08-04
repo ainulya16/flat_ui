@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FUITextField(
                 label: 'Email',
                 allowNextFocus: true,
-                borderType: FUITextFieldBorderType.bordered,
+                borderType: FUIFieldBorderType.bordered,
                 prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
                 hintText: 'john@doe.com',
                 borderRadius: 4,
@@ -68,12 +68,25 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FUITextField(
                 label: 'Password',
                 allowNextFocus: false,
-                borderType: FUITextFieldBorderType.bordered,
+                borderType: FUIFieldBorderType.bordered,
                 prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
                 borderRadius: 4,
                 obsecureText: true,
                 borderColor: '#bdc3c7',
                 focusedBorderColor: '2980b9',
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
+              child: FUIDropdownList(
+                // label: 'Password',
+                // allowNextFocus: false,
+                // borderType: FUIFieldBorderType.bordered,
+                // prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                // borderRadius: 4,
+                // obsecureText: true,
+                // borderColor: '#bdc3c7',
+                // focusedBorderColor: '2980b9',
               )
             ),
             Padding(
@@ -91,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: '#3498db',
                 text: 'LOGIN',
                 borderRadius: 4,
-                onPress: _incrementCounter,
+                onPress: ()=>print('login'),
               ),
             ),
           ],

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Bounce extends StatefulWidget {
+class FUIAnimationBounce extends StatefulWidget {
   final Widget child;
-  final Function onTap;
   final bool useOpacity, disabled;
   
-  Bounce({ @required this.child, this.onTap, this.useOpacity=false, this.disabled=false});
+  FUIAnimationBounce({ @required this.child, this.useOpacity=false, this.disabled=false});
   @override
-  _BounceState createState() => _BounceState();
+  _FUIAnimationBounceState createState() => _FUIAnimationBounceState();
 }
 
-class _BounceState extends State<Bounce> with SingleTickerProviderStateMixin {
+class _FUIAnimationBounceState extends State<FUIAnimationBounce> with SingleTickerProviderStateMixin {
   double _scale;
   AnimationController _controller;
   
@@ -41,9 +40,9 @@ class _BounceState extends State<Bounce> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    
     _scale = 1 - _controller.value;
     return GestureDetector(
-      onTap: !widget.disabled ? widget.onTap : null,
       onTapCancel: () => !widget.disabled ? _controller.reverse() : null,
       onTapDown: (TapDownDetails detail) =>!widget.disabled ? _controller.forward() : null,
       onTapUp: (TapUpDetails detail) => !widget.disabled ? _controller.reverse() : null,

@@ -1,4 +1,3 @@
-import 'package:flat_ui/Styles/BoxShadow.dart';
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -27,22 +26,24 @@ class FUIButtonText extends StatelessWidget {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 200),
       opacity: disabled ? 0.6 : 1.0,
-      child: Bounce(
+      child: FUIAnimationBounce(
         useOpacity: true,
         disabled: disabled,
-        onTap: onPress,
-        child: Text(
-          text,
-          style: TextStyle(
-            shadows: shadow ? [
-              boxShadow
-            ] : null,
-            fontSize: fontSize,
-            color: HexColor(textColor),
-            fontWeight: fontWeight,
-            fontFamily: 'OpenSans',
-            package: 'flat_ui'
-          )
+        child: GestureDetector(
+          onTap: onPress,
+          child: Text(
+            text,
+            style: TextStyle(
+              shadows: shadow ? [
+                boxShadow
+              ] : null,
+              fontSize: fontSize,
+              color: HexColor(textColor),
+              fontWeight: fontWeight,
+              fontFamily: 'OpenSans',
+              package: 'flat_ui'
+            )
+          ),
         ),
       )
     );
