@@ -1,3 +1,4 @@
+import 'package:flat_ui/Styles/BoxShadow.dart';
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ enum ButtonSize {
   full,   // infinity
 }
 
-class Button extends StatelessWidget {
+class FUIButton extends StatelessWidget {
   final Widget child;
   final String text, color, textColor;
   final Function onPress;
@@ -17,7 +18,7 @@ class Button extends StatelessWidget {
   final double width, height, borderRadius;
   final bool disabled, shadow;
   
-  Button({
+  FUIButton({
     this.child,
     @required this.text,
     this.color='#FFFFFF',
@@ -82,19 +83,14 @@ class Button extends StatelessWidget {
             color: HexColor(color),
             borderRadius: BorderRadius.circular(borderRadius),
             boxShadow: shadow ? [
-              BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 20.0,
-                  offset: Offset(0.0, 10.0,),
-                  spreadRadius: -10
-                ),
+              boxShadow
             ] : null,
           ),
           child: (size == ButtonSize.block || size == ButtonSize.full) ? Center(
-            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, color: HexColor(textColor))),
+            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
           ) :
           Container(
-            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, color: HexColor(textColor))),
+            child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
           ),
         ),
       ),
