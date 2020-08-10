@@ -1,5 +1,6 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,21 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 30,),
-
-            Row(children: <Widget>[
-              Expanded(child: FUITextField(
-                label: 'Email',
-                allowNextFocus: true,
-                borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
-                hintText: 'john@doe.com',
-                borderRadius: 4,
-                borderColor: '#bdc3c7',
-                focusedBorderColor: '2980b9',
-              ),),
-              
-            ],),
-            SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
               child: FUITextField(
@@ -103,6 +89,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FUIDropdownList(
                 options: options,
                 label: 'Option list',
+                borderType: FUIFieldBorderType.bordered,
+                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                borderRadius: 4,
+              )
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
+              child: FUIDateTimePicker(
+                label: 'Date Picker',
                 borderType: FUIFieldBorderType.bordered,
                 prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
                 borderRadius: 4,

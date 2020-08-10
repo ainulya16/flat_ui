@@ -1,15 +1,15 @@
 import 'package:flat_ui/flat_ui.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class OptionItem {
-  final String label;
-  final dynamic value;
-  OptionItem({this.label, this.value});
-}
-class FUIDropdownList extends StatefulWidget {
+
+
+
+class FUIDateTimePicker extends StatefulWidget {
+  final String dateFormat;
   final bool disabled;
-  final List<OptionItem> options;
-  final String initialValue;
+  final DateTime initialValue;
   final Function onChanged;
   final String errorMessage;
   final String label;
@@ -27,10 +27,10 @@ class FUIDropdownList extends StatefulWidget {
   final Widget suffixIcon;
   final FloatingLabelBehavior floatingLabelBehavior;
 
-  FUIDropdownList({
+  FUIDateTimePicker({
+    this.dateFormat='dd MMM yyyy',
     this.disabled=false,
     this.onChanged,
-    @required this.options,
     this.floatingLabelBehavior,
     this.suffixIcon,
     this.prefix,
@@ -50,10 +50,10 @@ class FUIDropdownList extends StatefulWidget {
   });
   
   @override
-  _FUIDropdownListState createState() => _FUIDropdownListState();
+  _FUIDateTimePickerState createState() => _FUIDateTimePickerState();
 }
 
-class _FUIDropdownListState extends State<FUIDropdownList>{
+class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
   bool isOpened = false;
   OverlayEntry _overlayEntry;
   TextEditingController _controller = new TextEditingController();
@@ -105,19 +105,19 @@ class _FUIDropdownListState extends State<FUIDropdownList>{
             top: offset.dy + size.height,
             width: size.width,
             child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [boxShadow]
-              ),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: widget.options.length,
-                itemBuilder: (buildCtx, index) {
-                  var item = widget.options[index];
-                  return FlatButton(onPressed:()=>onSelect(item.value), child: Text(item.label,style: TextStyle(fontSize: 18, fontFamily: 'OpenSans'),));
+              height: 200,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: DateTime.now(),
+                onDateTimeChanged: (DateTime newDateTime) {
+                  widget.onChanged != null && widget.onChanged(newDateTime);
+                  _controller.text = DateFormat(widget.dateFormat).format(newDateTime);
                 },
+                backgroundColor: Colors.white,
+                use24hFormat: false,
+                minuteInterval: 1,
               ),
-            )
+            ),
       )
     );
   }
@@ -129,7 +129,7 @@ class _FUIDropdownListState extends State<FUIDropdownList>{
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
         borderRadius: BorderRadius.circular(4),
-        onTap: (!widget.disabled&&!isOpened) ? openMenu : closeMenu,
+        onTap: (!widget.disabled && !isOpened) ? openMenu : closeMenu,
             child: FUITextField(
               label: widget.label,
               allowNextFocus: false,
@@ -144,7 +144,7 @@ class _FUIDropdownListState extends State<FUIDropdownList>{
               suffixIcon: widget.suffixIcon,
               suffixText: widget.suffixText,
               controller: _controller,
-              initialValue: widget.initialValue,
+              initialValue: widget.initialValue != null ? DateFormat(widget.dateFormat).format(widget.initialValue) : null,
               floatingLabelBehavior: widget.floatingLabelBehavior,
               helperText: widget.helperText,
               enabled: false,
