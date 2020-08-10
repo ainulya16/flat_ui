@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 class FUITextField extends StatelessWidget {
   final bool autofocus;
   final bool enabled;
+  final bool readOnly;
   final String initialValue;
   final List<TextInputFormatter> inputFormatters;
   final bool obsecureText;
@@ -33,6 +34,7 @@ class FUITextField extends StatelessWidget {
   FUITextField({
       this.autofocus=false,
       this.enabled=true,
+      this.readOnly=false,
       this.initialValue,
       this.inputFormatters,
       this.obsecureText=false,
@@ -88,6 +90,7 @@ class FUITextField extends StatelessWidget {
       onTap: onTap,
       autofocus: autofocus,
       enabled: enabled,
+      readOnly: readOnly,
       initialValue: initialValue,
       inputFormatters: inputFormatters,
       obscureText: obsecureText,

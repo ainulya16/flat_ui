@@ -32,6 +32,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  List<OptionItem> options = [
+    OptionItem(label: 'Label text 1', value: 1),
+    OptionItem(label: 'dasds', value: 2),
+    OptionItem(label: 'Label text 3', value: 3),
+    OptionItem(label: 'Label text 4', value: 4),
+    OptionItem(label: 'Label text 5', value: 5),
+  ];
 
   void _incrementCounter() {
     setState(() {
@@ -49,6 +56,21 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 30,),
+
+            Row(children: <Widget>[
+              Expanded(child: FUITextField(
+                label: 'Email',
+                allowNextFocus: true,
+                borderType: FUIFieldBorderType.bordered,
+                prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
+                hintText: 'john@doe.com',
+                borderRadius: 4,
+                borderColor: '#bdc3c7',
+                focusedBorderColor: '2980b9',
+              ),),
+              
+            ],),
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
@@ -79,16 +101,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
               child: FUIDropdownList(
-                // label: 'Password',
-                // allowNextFocus: false,
-                // borderType: FUIFieldBorderType.bordered,
-                // prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
-                // borderRadius: 4,
-                // obsecureText: true,
-                // borderColor: '#bdc3c7',
-                // focusedBorderColor: '2980b9',
+                options: options,
+                label: 'Option list',
+                borderType: FUIFieldBorderType.bordered,
+                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                borderRadius: 4,
               )
             ),
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 5),
               child: Row(
