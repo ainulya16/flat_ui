@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 
 
 
-
 class FUIDateTimePicker extends StatefulWidget {
   final String dateFormat;
   final bool disabled;
@@ -26,8 +25,11 @@ class FUIDateTimePicker extends StatefulWidget {
   final dynamic prefix;
   final Widget suffixIcon;
   final FloatingLabelBehavior floatingLabelBehavior;
+  final DateTime minimumDate;
+  // final int minimumYear,maximumYear;
 
   FUIDateTimePicker({
+    key: Key,
     this.dateFormat='dd MMM yyyy',
     this.disabled=false,
     this.onChanged,
@@ -47,6 +49,7 @@ class FUIDateTimePicker extends StatefulWidget {
     this.errorBorderColor='#e74c3c',
     this.focusedBorderColor='#3498db',
     this.disabledBorderColor='#bdc3c7',
+    this.minimumDate,
   });
   
   @override
@@ -75,11 +78,31 @@ class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
   
 
   openMenu() {
-    setState(() {
-      _overlayEntry = _overlayEntryBuilder();
-      isOpened = !isOpened;
+    final initialDate = DateTime.now();
+    final minDate = initialDate.subtract(Duration(days: 365));
+    return showModalBottomSheet(context: context, builder: (BuildContext context) {
+      return Container(
+        color: Colors.white,
+        height: 200,
+        width: double.infinity,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          // maximumDate: widget.maximumDate,
+          // maximumYear: widget.maximumYear,
+          // minimumDate: widget.minimumDate,
+          // minimumYear: widget.minimumYear,
+          initialDateTime: initialDate,
+          onDateTimeChanged: (DateTime newDateTime) {
+            widget.onChanged != null && widget.onChanged(newDateTime);
+            _controller.text = DateFormat(widget.dateFormat).format(newDateTime);
+          },
+          backgroundColor: Colors.white,
+          use24hFormat: false,
+          minuteInterval: 1,
+        ),
+      );
+                  // return Center(child: Text("This is a Modal."));
     });
-    Overlay.of(context).insert(_overlayEntry);
   }
 
   closeMenu() {
