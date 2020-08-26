@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
-
 class FUIDateTimePicker extends StatefulWidget {
   final String dateFormat;
   final bool disabled;
@@ -25,8 +23,6 @@ class FUIDateTimePicker extends StatefulWidget {
   final dynamic prefix;
   final Widget suffixIcon;
   final FloatingLabelBehavior floatingLabelBehavior;
-  final DateTime minimumDate;
-  // final int minimumYear,maximumYear;
 
   FUIDateTimePicker({
     key: Key,
@@ -49,7 +45,6 @@ class FUIDateTimePicker extends StatefulWidget {
     this.errorBorderColor='#e74c3c',
     this.focusedBorderColor='#3498db',
     this.disabledBorderColor='#bdc3c7',
-    this.minimumDate,
   });
   
   @override
@@ -58,7 +53,6 @@ class FUIDateTimePicker extends StatefulWidget {
 
 class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
   bool isOpened = false;
-  OverlayEntry _overlayEntry;
   TextEditingController _controller = new TextEditingController();
   @override
   void initState() {
@@ -77,9 +71,8 @@ class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
   }
   
 
-  openMenu() {
+  openDatePicker() {
     final initialDate = DateTime.now();
-    final minDate = initialDate.subtract(Duration(days: 365));
     return showModalBottomSheet(context: context, builder: (BuildContext context) {
       return Container(
         color: Colors.white,
@@ -101,49 +94,9 @@ class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
           minuteInterval: 1,
         ),
       );
-                  // return Center(child: Text("This is a Modal."));
     });
   }
 
-  closeMenu() {
-    _overlayEntry.remove();
-    setState(() {
-      isOpened = !isOpened;
-    });
-  }
-
-  onSelect(value) {
-    closeMenu();
-    _controller.text = value.toString();
-    widget.onChanged(value);
-  }
-
-  _overlayEntryBuilder() {
-    RenderBox renderBox = context.findRenderObject();
-    var size = renderBox.size;
-    var offset = renderBox.localToGlobal(Offset.zero);
-    return OverlayEntry(
-      builder: (ctx) => Positioned(
-            left: offset.dx,
-            top: offset.dy + size.height,
-            width: size.width,
-            child: Container(
-              height: 200,
-              child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: DateTime.now(),
-                onDateTimeChanged: (DateTime newDateTime) {
-                  widget.onChanged != null && widget.onChanged(newDateTime);
-                  _controller.text = DateFormat(widget.dateFormat).format(newDateTime);
-                },
-                backgroundColor: Colors.white,
-                use24hFormat: false,
-                minuteInterval: 1,
-              ),
-            ),
-      )
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +105,7 @@ class _FUIDateTimePickerState extends State<FUIDateTimePicker>{
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
         borderRadius: BorderRadius.circular(4),
-        onTap: (!widget.disabled && !isOpened) ? openMenu : closeMenu,
+        onTap: openDatePicker,
             child: FUITextField(
               label: widget.label,
               allowNextFocus: false,
