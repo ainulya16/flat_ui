@@ -6,7 +6,7 @@ author:
 homepage: https://github.com/ainulya16/flat_ui
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   intl: ^0.15.7 

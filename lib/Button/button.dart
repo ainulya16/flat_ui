@@ -14,8 +14,9 @@ class FUIButton extends StatelessWidget {
   final String text, color, textColor;
   final Function onPress;
   final ButtonSize size;
-  final double width, height, borderRadius;
+  final double width, height, buttonFullHeight, borderRadius;
   final bool disabled, shadow;
+  final TextStyle textStyle;
   
   FUIButton({
     this.child,
@@ -26,9 +27,12 @@ class FUIButton extends StatelessWidget {
     this.onPress,
     this.size=ButtonSize.block,
     this.height,
+    this.buttonFullHeight=50,
     this.width,
     this.borderRadius=7,
-    this.disabled=false});
+    this.disabled=false,
+    this.textStyle,
+  });
 
 
   @override
@@ -66,6 +70,7 @@ class FUIButton extends StatelessWidget {
         defaultFontSize = 18;
         break;
     }
+    TextStyle defaultTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor));
     return AnimatedOpacity(
       duration: Duration(milliseconds: 200),
       opacity: disabled ? 0.6 : 1.0,
@@ -76,7 +81,7 @@ class FUIButton extends StatelessWidget {
           onTap: onPress,
           child: Container(
             margin: size == ButtonSize.full ? EdgeInsets.all(0) : EdgeInsets.fromLTRB(10,20,10,20),
-            height: (size == ButtonSize.block || size == ButtonSize.full) ? 55 : height,
+            height: (size == ButtonSize.block || size == ButtonSize.full) ? buttonFullHeight : height,
             width: width,
             padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
             decoration: BoxDecoration(
@@ -87,10 +92,10 @@ class FUIButton extends StatelessWidget {
               ] : null,
             ),
             child: (size == ButtonSize.block || size == ButtonSize.full) ? Center(
-              child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
+              child: child != null ? child : Text(text, style: defaultTextStyle.merge(textStyle)),
             ) :
             Container(
-              child: child != null ? child : Text(text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor))),
+              child: child != null ? child : Text(text, style: defaultTextStyle.merge(textStyle)),
             ),
           ),
         ),

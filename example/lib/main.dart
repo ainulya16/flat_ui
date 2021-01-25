@@ -39,6 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
     OptionItem(label: 'Label text 3', value: 3),
     OptionItem(label: 'Label text 4', value: 4),
     OptionItem(label: 'Label text 5', value: 5),
+    OptionItem(label: 'Label text 12', value: 11),
+    OptionItem(label: 'dasdssadasd', value: 22),
+    OptionItem(label: 'Label text 33', value: 31),
+    OptionItem(label: 'Label text 43', value: 41),
+    OptionItem(label: 'Label text 53', value: 51),
+    OptionItem(label: 'Label text 14', value: 12),
+    OptionItem(label: 'dasdszxczxc', value: 23),
+    OptionItem(label: 'Label text 34', value: 33),
+    OptionItem(label: 'Label text 45', value: 43),
+    OptionItem(label: 'Label text 56', value: 53),
   ];
 
   void _incrementCounter() {
