@@ -71,15 +71,10 @@ class FUIButton extends StatelessWidget {
         break;
     }
     TextStyle defaultTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor));
-    return AnimatedOpacity(
-      duration: Duration(milliseconds: 200),
-      opacity: disabled ? 0.6 : 1.0,
-      child: FUIAnimationBounce(
-        useOpacity: true,
-        disabled: disabled,
-        child:GestureDetector(
-          onTap: onPress,
-          child: Container(
+    return FUIButtonBase(
+      disabled: disabled,
+      onPress: onPress,
+      child: Container(
             margin: size == ButtonSize.full ? EdgeInsets.all(0) : EdgeInsets.fromLTRB(10,20,10,20),
             height: (size == ButtonSize.block || size == ButtonSize.full) ? buttonFullHeight : height,
             width: width,
@@ -98,8 +93,6 @@ class FUIButton extends StatelessWidget {
               child: child != null ? child : Text(text, style: defaultTextStyle.merge(textStyle)),
             ),
           ),
-        ),
-      ),
     );
   }
 

@@ -31,6 +31,7 @@ class FUITextField extends StatelessWidget {
   final Widget suffixIcon;
   final FloatingLabelBehavior floatingLabelBehavior;
   final Function onTap;
+  final FocusNode focusNode;
   FUITextField({
       this.autofocus=false,
       this.enabled=true,
@@ -57,6 +58,7 @@ class FUITextField extends StatelessWidget {
       this.suffixIcon,
       this.floatingLabelBehavior,
       this.onTap,
+      this.focusNode,
       this.allowNextFocus = false});
 
   @override
@@ -97,6 +99,7 @@ class FUITextField extends StatelessWidget {
       style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'OpenSans', package: 'flat_ui', fontWeight: FontWeight.w600),
       controller: controller,
       onChanged: onChanged,
+      focusNode: focusNode,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (_) => allowNextFocus ? FocusScope.of(context).nextFocus() : FocusScope.of(context).unfocus() ,

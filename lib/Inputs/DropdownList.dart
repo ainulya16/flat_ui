@@ -9,7 +9,7 @@ class OptionItem {
 }
 
 class FUIDropdownList extends StatefulWidget {
-  final bool disabled;
+  final bool disabled, searchable;
   final List<OptionItem> options;
   final String initialValue;
   final Function onChanged;
@@ -31,6 +31,7 @@ class FUIDropdownList extends StatefulWidget {
 
   FUIDropdownList({
     this.disabled = false,
+    this.searchable = false,
     this.onChanged,
     @required this.options,
     this.floatingLabelBehavior,
@@ -93,22 +94,21 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          color: Colors.white,
-                          boxShadow: [boxShadow]
-                        ),
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            color: Colors.white,
+                            boxShadow: [boxShadow]),
                         child: FUITextField(
                           label: 'Search',
-                          allowNextFocus: true,
-                          borderType: FUIFieldBorderType.none,
+                          allowNextFocus: false,
+                          borderType: FUIFieldBorderType.bordered,
                           prefix: Icon(
-                            Icons.mail_outline,
+                            Icons.search,
                             color: HexColor('#2980b9'),
                           ),
-                          hintText: 'john@doe.com',
                           borderRadius: 4,
                           borderColor: '#bdc3c7',
                           focusedBorderColor: '2980b9',
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
                       Container(height: 30),

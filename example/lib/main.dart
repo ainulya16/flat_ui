@@ -92,6 +92,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 obsecureText: true,
                 borderColor: '#bdc3c7',
                 focusedBorderColor: '2980b9',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
+              child: FUISearchField(
+                label: 'Search',
+                clearable: true,
+                borderType: FUIFieldBorderType.bordered,
+                prefix: Icon(Icons.search, color: HexColor('#2980b9'),),
+                borderRadius: 4,
+                borderColor: '#bdc3c7',
+                focusedBorderColor: '2980b9',
               )
             ),
             Padding(
