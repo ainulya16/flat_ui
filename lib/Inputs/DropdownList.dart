@@ -97,18 +97,16 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
                             borderRadius: BorderRadius.all(Radius.circular(4)),
                             color: Colors.white,
                             boxShadow: [boxShadow]),
-                        child: FUITextField(
+                        child: FUISearchField(
                           label: 'Search',
-                          allowNextFocus: false,
-                          borderType: FUIFieldBorderType.bordered,
+                          borderType: FUIFieldBorderType.none,
                           prefix: Icon(
                             Icons.search,
                             color: HexColor('#2980b9'),
                           ),
                           borderRadius: 4,
-                          borderColor: '#bdc3c7',
-                          focusedBorderColor: '2980b9',
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          focusedBorderColor: widget.focusedBorderColor,
+                          borderColor: '#ffffff',
                         ),
                       ),
                       Container(height: 30),

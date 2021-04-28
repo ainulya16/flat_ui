@@ -12,7 +12,7 @@ class FUITextField extends StatelessWidget {
   final List<TextInputFormatter> inputFormatters;
   final bool obsecureText;
   final TextEditingController controller;
-  final Function onChanged;
+  final dynamic onChanged;
   final String errorMessage;
   final String label;
   final String hintText;

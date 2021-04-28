@@ -12,3 +12,8 @@ export 'Inputs/DropdownList.dart';
 export 'Inputs/DateTimePicker.dart';
 export 'types/types.dart';
 export 'Styles/BoxShadow.dart';
+export 'Stepper/Stepper.dart';
+export 'Stepper/StepperItem.type.dart';
+export 'Stepper/StepperController.dart';
+export 'ProgressBar/CircleProgressBar.dart';
+export 'ProgressBar/LinearProgressBar.dart';

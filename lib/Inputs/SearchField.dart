@@ -46,6 +46,7 @@ class FUISearchField extends StatefulWidget {
 class _FUISearchFieldState extends State<FUISearchField>{
   TextEditingController controller = TextEditingController();
   FocusNode _focusNode = new FocusNode();
+  String input = '';
 
   @override
   void initState() {
@@ -59,6 +60,14 @@ class _FUISearchFieldState extends State<FUISearchField>{
     controller.clear();
   }
 
+  onChanged(text) {
+    widget.onChanged(text);
+    print(text);
+    setState(() {
+      input = text;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FUITextField(
@@ -70,10 +79,10 @@ class _FUISearchFieldState extends State<FUISearchField>{
       borderColor: widget.borderColor,
       focusedBorderColor: widget.focusedBorderColor,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      onChanged: widget.onChanged,
+      onChanged: onChanged,
       controller: controller,
       keyboardType: widget.keyboardType,
-      suffixIcon: widget.clearable && controller.text.isNotEmpty ? FUIButtonBase(
+      suffixIcon: input.length > 0 ? FUIButtonBase(
         onPress: onClear,
         child: Icon(Icons.close, color: Colors.black,),
       ) : null,
