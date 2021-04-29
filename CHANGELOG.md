@@ -15,3 +15,6 @@
 ## [0.1.1] - TODO: Date Picker.
 
 * remove color helper.
+## [0.1.2] - TODO: Date Picker.
+
+* change stepper controller.
