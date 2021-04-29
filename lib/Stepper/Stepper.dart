@@ -10,11 +10,13 @@ class FUIStepper extends StatefulWidget {
   final Function onPageChanged;
   final Function onFinished;
   final List<StepperItem> pages;
-  final Color inActiveColor;
-  final Color activeColor;
+  final Color activeBgColor;
+  final Color inActiveBgColor;
+  
+  final Color activeTextColor;
+  final Color inActiveTextColor;
+
   final Color activeTitleColor;
-  final Color inActiveNumberColor;
-  final Color activeNumberColor;
   final Color headerColor;
   final StepperController controller;
   final Widget header;
@@ -23,10 +25,10 @@ class FUIStepper extends StatefulWidget {
       {key: Key,
       this.onPageChanged,
       this.onFinished,
-      this.inActiveColor = Colors.white,
-      this.activeColor = Colors.blue,
-      this.inActiveNumberColor = Colors.black,
-      this.activeNumberColor = Colors.white,
+      this.activeBgColor = Colors.blue,
+      this.inActiveBgColor = Colors.white,
+      this.inActiveTextColor = Colors.black,
+      this.activeTextColor = Colors.white,
       this.activeTitleColor = Colors.black,
       this.headerColor = Colors.white,
       this.controller,
@@ -55,6 +57,10 @@ class _FUIStepperState extends State<FUIStepper> with TickerProviderStateMixin {
   }
 
   next() {
+    if(currentPage == widget.pages.length) {
+      widget.onFinished != null && widget.onFinished();
+      return;
+    }
     setState(() {
       currentPage = currentPage + 1;
     });
@@ -65,6 +71,9 @@ class _FUIStepperState extends State<FUIStepper> with TickerProviderStateMixin {
   }
 
   prev() {
+    if(currentPage == 1) {
+      return;
+    }
     setState(() {
       currentPage = currentPage - 1;
     });
@@ -87,58 +96,25 @@ class _FUIStepperState extends State<FUIStepper> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Widget number(int value, bool active) {
-    Widget icon = Icon(Icons.check, size: 17, color: Colors.white);
-    Widget text = Text('$value',
-        style: TextStyle(
-            fontSize: 17,
-            color: active
-                ? widget.activeNumberColor
-                : widget.inActiveNumberColor));
-    bool finished = value < currentPage;
-    return Container(
-      height: 25,
-      width: 25,
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-      padding: EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black38,
-              blurRadius: 2.0,
-              offset: Offset(
-                0.0,
-                2.0,
-              ),
-              spreadRadius: -1)
-        ],
-        borderRadius: BorderRadius.all(
-          Radius.circular(200),
-        ),
-        color: active ? widget.activeColor : widget.inActiveColor,
-      ),
-      child: Center(child: finished ? icon : text),
-    );
-  }
-
   List<Widget> renderTitle() {
     return widget.pages.map((page) {
       var index = widget.pages.indexOf(page);
-      final x = 40 * widget.pages.length;
-      var width = MediaQuery.of(context).size.width - x;
-      var active = index == (currentPage -1);
-      return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            number(index + 1, index <= currentPage - 1),
-            FUIStepperTitle(
-              expanded: active,
-              width: width,
+      var active = index == (currentPage - 1);
+      var finished = index < (currentPage - 1);
+      var baseWidth = MediaQuery.of(context).size.width - 20;
+      return FUIStepperTitle(
+        width: baseWidth,
+              numberOfPages: widget.pages.length,
+              finished: finished,
+              active: active,
               title: page.title,
               activeTitleColor: widget.activeTitleColor,
-            ),
-          ]);
+              number: (index + 1).toString(),
+              activeBgColor: widget.activeBgColor,
+              inActiveBgColor: widget.inActiveBgColor,
+              activeTextColor: widget.activeTextColor,
+              inActiveTextColor: widget.inActiveTextColor,
+            );
     }).toList();
   }
 

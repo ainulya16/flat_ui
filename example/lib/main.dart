@@ -1,3 +1,5 @@
+import 'package:example/pages/Account.dart';
+import 'package:example/pages/Payment.dart';
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -35,101 +37,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    StepperItem page1 = new StepperItem(
-        title: "Pasien",
-        page: Container(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
-            height: 50.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton(
-                  child: Text("Next"),
-                  onPressed: () {
-                    controller.next();
-                  },
-                ),
-              ],
-            ),
-          ),
-        )));
-    StepperItem page2 = new StepperItem(
-        title: "Pasien 2",
-        page: Container(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
-            height: 50.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton(
-                  child: Text("Prev"),
-                  onPressed: () {
-                    controller.prev();
-                  },
-                ),
-                FlatButton(
-                  child: Text("Next"),
-                  onPressed: () {
-                    controller.next();
-                  },
-                ),
-              ],
-            ),
-          ),
-        )));
-    StepperItem page3 = new StepperItem(
-        title: "Pasien 3",
-        page: Container(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
-            height: 50.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton(
-                  child: Text("Prev"),
-                  onPressed: () {
-                    controller.prev();
-                  },
-                ),
-              ],
-            ),
-          ),
-        )));
-    StepperItem page4 = new StepperItem(
-        title: "Pasien 3",
-        page: Container(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
-            height: 50.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton(
-                  child: Text("Prev"),
-                  onPressed: () {
-                    controller.prev();
-                  },
-                ),
-              ],
-            ),
-          ),
-        )));
+    StepperItem account2 = new StepperItem(
+        title: "Account",
+        page: Account(stepperController: controller,));
+    StepperItem account = new StepperItem(
+        title: "Account",
+        page: Account(stepperController: controller,));
+    StepperItem payment = new StepperItem(
+        title: "Payment Detail",
+        page: Payment(stepperController: controller,));
+    StepperItem shipment = new StepperItem(
+        title: "Shipment Detail",
+        page: Payment(stepperController: controller,));
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: SafeArea(
         child: FUIStepper(
           controller: controller,
           headerColor: Colors.grey.shade200,
-          pages: [page1, page2, page3, page4],
-          inActiveColor: Colors.grey.shade100,
-          inActiveNumberColor: Colors.grey.shade700,
+          pages: [account, payment, shipment, account2],
+          inActiveBgColor: Colors.grey.shade100,
+          inActiveTextColor: Colors.grey.shade700,
           key: 'FUIStepper',
         ),
       ),
