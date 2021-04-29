@@ -1,6 +1,7 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class OptionItem {
   final String label;
@@ -78,7 +79,7 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
         barrierColor: Colors.transparent,
         context: context,
         barrierDismissible: true,
-        child: Material(
+        builder: (ctx )=> Material(
           type: MaterialType.transparency,
           child: Center(
             child: BackdropFilter(
@@ -102,7 +103,7 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
                           borderType: FUIFieldBorderType.none,
                           prefix: Icon(
                             Icons.search,
-                            color: HexColor('#2980b9'),
+                            color: TinyColor.fromString('#2980b9').color,
                           ),
                           borderRadius: 4,
                           focusedBorderColor: widget.focusedBorderColor,

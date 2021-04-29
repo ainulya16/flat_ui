@@ -2,6 +2,7 @@ import 'package:flat_ui/flat_ui.dart';
 import 'package:flat_ui/types/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 
 class FUITextField extends StatelessWidget {
@@ -64,10 +65,10 @@ class FUITextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     InputBorder inputBorder = InputBorder.none;
-    BorderSide borderSide = BorderSide(color:HexColor(borderColor));
-    BorderSide errorBorderSide = BorderSide(color: HexColor(errorBorderColor));
-    BorderSide focusedBorderSide = BorderSide(color: HexColor(focusedBorderColor));
-    BorderSide disabledBorderSide = BorderSide(color: HexColor(disabledBorderColor));
+    BorderSide borderSide = BorderSide(color:TinyColor.fromString(borderColor).color);
+    BorderSide errorBorderSide = BorderSide(color: TinyColor.fromString(errorBorderColor).color);
+    BorderSide focusedBorderSide = BorderSide(color: TinyColor.fromString(focusedBorderColor).color);
+    BorderSide disabledBorderSide = BorderSide(color: TinyColor.fromString(disabledBorderColor).color);
     Widget prefixIcon;
     switch (borderType) {
       case FUIFieldBorderType.underline:
@@ -112,7 +113,7 @@ class FUITextField extends StatelessWidget {
           disabledBorder: inputBorder.copyWith(borderSide: disabledBorderSide),
           prefixIconConstraints: BoxConstraints(maxWidth: 100, minWidth: 45),
           filled: backgroundColor != null,
-          fillColor: backgroundColor != null ? HexColor(backgroundColor) : Colors.transparent,
+          fillColor: backgroundColor != null ? TinyColor.fromString(backgroundColor).color : Colors.transparent,
           contentPadding: EdgeInsets.all(10),
           labelText: label,
           labelStyle: TextStyle(fontFamily: 'OpenSans', package: 'flat_ui', fontWeight: FontWeight.w600),

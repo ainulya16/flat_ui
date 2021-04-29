@@ -1,13 +1,13 @@
 name: flat_ui
 description: Flat UI.
-version: 0.0.2
+version: 0.1.1
 homepage: https://github.com/ainulya16/flat_ui
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
-  intl: ^0.15.7 
+  intl: ^0.17.0
   tinycolor: ^1.0.3
   flutter:
     sdk: flutter

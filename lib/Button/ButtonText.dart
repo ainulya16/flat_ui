@@ -1,5 +1,6 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class FUIButtonText extends StatelessWidget {
   final Widget child;
@@ -28,7 +29,7 @@ class FUIButtonText extends StatelessWidget {
           style: TextStyle(
               shadows: shadow ? [boxShadow] : null,
               fontSize: fontSize,
-              color: HexColor(textColor),
+              color: TinyColor.fromString(textColor).color,
               fontWeight: fontWeight,
               fontFamily: 'OpenSans',
               package: 'flat_ui')),

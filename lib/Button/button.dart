@@ -1,5 +1,6 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 enum ButtonSize {
   small,  // height 35
@@ -70,7 +71,7 @@ class FUIButton extends StatelessWidget {
         defaultFontSize = 18;
         break;
     }
-    TextStyle defaultTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: HexColor(textColor));
+    TextStyle defaultTextStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: defaultFontSize, letterSpacing: 1.2, fontFamily: 'OpenSans', package: 'flat_ui', color: TinyColor.fromString(textColor).color);
     return FUIButtonBase(
       disabled: disabled,
       onPress: onPress,
@@ -80,7 +81,7 @@ class FUIButton extends StatelessWidget {
             width: width,
             padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
             decoration: BoxDecoration(
-              color: HexColor(color),
+              color: TinyColor.fromString(color).color,
               borderRadius: BorderRadius.circular(borderRadius),
               boxShadow: shadow ? [
                 boxShadow
