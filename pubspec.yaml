@@ -1,8 +1,6 @@
 name: flat_ui
 description: Flat UI.
-version: 0.0.1
-author: 
-  - Ainul Yaqin <ainulyaqinmuntako@gmail.com>
+version: 0.0.2
 homepage: https://github.com/ainulya16/flat_ui
 
 environment:
@@ -10,6 +8,7 @@ environment:
 
 dependencies:
   intl: ^0.15.7 
+  tinycolor: ^1.0.3
   flutter:
     sdk: flutter
 

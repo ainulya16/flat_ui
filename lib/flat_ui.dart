@@ -17,3 +17,4 @@ export 'Stepper/StepperItem.type.dart';
 export 'Stepper/StepperController.dart';
 export 'ProgressBar/CircleProgressBar.dart';
 export 'ProgressBar/LinearProgressBar.dart';
+export 'Expandable/Expandable.dart';

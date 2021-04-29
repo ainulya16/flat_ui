@@ -1,11 +1,14 @@
-import 'dart:math' as Math;
+import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class FUILinearProgressBar extends StatefulWidget {
   final Duration animationDuration;
   final Color backgroundColor;
   final Color foregroundColor;
-  final double value;
+  final double value, strokeWidth;
+  final bool useGradient;
 
   const FUILinearProgressBar({
     Key key,
@@ -13,6 +16,8 @@ class FUILinearProgressBar extends StatefulWidget {
     this.backgroundColor,
     @required this.foregroundColor,
     @required this.value,
+    this.strokeWidth = 7,
+    this.useGradient = false,
   }) : super(key: key);
 
   @override
@@ -37,7 +42,7 @@ class FUILinearProgressBarState extends State<FUILinearProgressBar>
     super.initState();
 
     this._controller = AnimationController(
-      duration: this.widget.animationDuration ?? const Duration(seconds: 1),
+      duration: this.widget.animationDuration ?? const Duration(milliseconds: 400),
       vsync: this,
     );
 
@@ -119,8 +124,10 @@ class FUILinearProgressBarState extends State<FUILinearProgressBar>
             return CustomPaint(
               child: child,
               foregroundPainter: FUILinearProgressBarPainter(
+                strokeWidth: widget.strokeWidth,
                 backgroundColor: backgroundColor,
                 foregroundColor: foregroundColor,
+                useGradient: widget.useGradient,
                 percentage: this.valueTween.evaluate(this.curve),
               ),
             );
@@ -135,24 +142,41 @@ class FUILinearProgressBarPainter extends CustomPainter {
   final double strokeWidth;
   final Color backgroundColor;
   final Color foregroundColor;
+  final bool useGradient;
 
   FUILinearProgressBarPainter({
     this.backgroundColor,
     @required this.foregroundColor,
     @required this.percentage,
     double strokeWidth,
+    this.useGradient = false,
   }) : this.strokeWidth = strokeWidth ?? 6;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final double width = size.width * this.percentage;
+    final gradient = ui.Gradient.linear(
+          Offset.zero,
+          Offset(width,0),
+    [
+      // Colors.black,
+      this.foregroundColor,
+      TinyColor(this.foregroundColor).lighten(15).color,
+    ],
+    [
+      0.7,
+      1.0,
+    ]
+  );
     final foregroundPaint = Paint()
       ..color = this.foregroundColor
       ..strokeWidth = this.strokeWidth
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
-    // Start at the top. 0 radians represents the right edge
-    final double sweep = size.width * this.percentage;
+    if (this.useGradient) {
+      foregroundPaint..shader = gradient;
+    }
     // // Don't draw the background if we don't have a background color
     if (this.backgroundColor != null) {
       final backgroundPaint = Paint()
@@ -162,7 +186,7 @@ class FUILinearProgressBarPainter extends CustomPainter {
       canvas.drawLine(Offset.zero, Offset(size.width, 0), backgroundPaint);
     }
 
-    canvas.drawLine(Offset.zero, Offset(sweep,0), foregroundPaint);
+    canvas.drawLine(Offset.zero, Offset(width,0), foregroundPaint);
   }
 
   @override

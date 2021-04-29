@@ -36,37 +36,98 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     StepperItem page1 = new StepperItem(
-      title: "Pasien",
-      page: Container(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Container(
-              height: 50.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text("Previous"),
-                    onPressed: () {
-                      controller.next();
-                    },
-                  ),
-                ],
-              ),
+        title: "Pasien",
+        page: Container(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Container(
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  child: Text("Next"),
+                  onPressed: () {
+                    controller.next();
+                  },
+                ),
+              ],
             ),
-          )
-      ,
-        )
-    );
-    StepperItem page2 = new StepperItem(page: Container(color: Colors.red,), title: 'Data 1');
-    StepperItem page3 = new StepperItem(page: Container(color: Colors.red,), title: 'Data 2');
+          ),
+        )));
+    StepperItem page2 = new StepperItem(
+        title: "Pasien 2",
+        page: Container(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Container(
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  child: Text("Prev"),
+                  onPressed: () {
+                    controller.prev();
+                  },
+                ),
+                FlatButton(
+                  child: Text("Next"),
+                  onPressed: () {
+                    controller.next();
+                  },
+                ),
+              ],
+            ),
+          ),
+        )));
+    StepperItem page3 = new StepperItem(
+        title: "Pasien 3",
+        page: Container(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Container(
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  child: Text("Prev"),
+                  onPressed: () {
+                    controller.prev();
+                  },
+                ),
+              ],
+            ),
+          ),
+        )));
+    StepperItem page4 = new StepperItem(
+        title: "Pasien 3",
+        page: Container(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Container(
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  child: Text("Prev"),
+                  onPressed: () {
+                    controller.prev();
+                  },
+                ),
+              ],
+            ),
+          ),
+        )));
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: SafeArea(
         child: FUIStepper(
           controller: controller,
           headerColor: Colors.grey.shade200,
-          pages: [page1, page2, page3],
+          pages: [page1, page2, page3, page4],
           inActiveColor: Colors.grey.shade100,
           inActiveNumberColor: Colors.grey.shade700,
           key: 'FUIStepper',
