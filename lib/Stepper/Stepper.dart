@@ -18,7 +18,7 @@ class FUIStepper extends StatefulWidget {
 
   final Color activeTitleColor;
   final Color headerColor;
-  final StepperController controller;
+  final FUIStepperController controller;
   final Widget header;
 
   FUIStepper(
@@ -48,7 +48,7 @@ class _FUIStepperState extends State<FUIStepper> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     totalPage = widget.pages.length;
-    StepperController _controller = widget.controller;
+    FUIStepperController _controller = widget.controller;
     if (_controller != null) {
       _controller.next = next;
       _controller.prev = prev;

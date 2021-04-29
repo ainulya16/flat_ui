@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 typedef FunctionThatReturned(int value);
 
-class StepperController {
+class FUIStepperController {
   VoidCallback next;
   VoidCallback prev;
   FunctionThatReturned setPage;
