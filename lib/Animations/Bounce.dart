@@ -34,8 +34,8 @@ class _FUIAnimationBounceState extends State<FUIAnimationBounce> with SingleTick
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override

@@ -34,8 +34,8 @@ class _FUIAnimationOpacityState extends State<FUIAnimationOpacity> with SingleTi
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override

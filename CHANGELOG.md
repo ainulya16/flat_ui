@@ -21,3 +21,6 @@
 ## [0.1.3] - TODO: Date Picker.
 
 * fix example.
+## [0.1.4] - TODO: Date Picker.
+
+* fix animation dispose.
