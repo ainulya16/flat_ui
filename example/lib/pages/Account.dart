@@ -1,10 +1,11 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class Account extends StatefulWidget {
   Account({Key key, this.stepperController}) : super(key: key);
 
-  final StepperController stepperController;
+  final FUIStepperController stepperController;
 
   @override
   _AccountState createState() => _AccountState();
@@ -45,7 +46,7 @@ class _AccountState extends State<Account> {
                 label: 'Email',
                 allowNextFocus: true,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.mail_outline, color: TinyColor.fromString('#2980b9').color,),
                 hintText: 'john@doe.com',
                 borderRadius: 4,
                 borderColor: '#bdc3c7',
@@ -58,7 +59,7 @@ class _AccountState extends State<Account> {
                 label: 'Password',
                 allowNextFocus: false,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
                 obsecureText: true,
                 borderColor: '#bdc3c7',
@@ -72,7 +73,7 @@ class _AccountState extends State<Account> {
               child: FUIDateTimePicker(
                 label: 'Date of Birth',
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
               )
             ),

@@ -161,10 +161,14 @@ class FUILinearProgressBarPainter extends CustomPainter {
     [
       // Colors.black,
       this.foregroundColor,
+      this.foregroundColor,
       TinyColor(this.foregroundColor).lighten(15).color,
+      TinyColor(this.foregroundColor).lighten(25).color,
     ],
     [
-      0.7,
+      0.5,
+      0.6,
+      0.8,
       1.0,
     ]
   );

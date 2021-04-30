@@ -39,7 +39,7 @@ class _FUIStepperTitleState extends State<FUIStepperTitle> with TickerProviderSt
     super.initState();
     _titleAnimationController = AnimationController(duration: new Duration(milliseconds: 400), vsync: this);
     _sizeAnimation = Tween(begin: 0.0, end: widget.width - (widget.numberOfPages * 40)).animate(CurvedAnimation(curve: Curves.linear, parent: _titleAnimationController));
-    _textSizeAnimation = Tween(begin: 0.0, end: 17.0).animate(CurvedAnimation(curve: Curves.linear, parent: _titleAnimationController));
+    _textSizeAnimation = Tween(begin: 0.0, end: 18.0).animate(CurvedAnimation(curve: Curves.linear, parent: _titleAnimationController));
     toggle();
   }
 
@@ -76,6 +76,8 @@ class _FUIStepperTitleState extends State<FUIStepperTitle> with TickerProviderSt
     Widget text = Text('${widget.number}',
         style: TextStyle(
             fontSize: 17,
+            height: 1,
+            fontFamily: 'OpenSans',
             color: textColor));
     return Container(
       width: 40,
@@ -124,7 +126,7 @@ class _FUIStepperTitleState extends State<FUIStepperTitle> with TickerProviderSt
                               children: [Text(
                   '${widget.title}',
                   overflow: TextOverflow.fade,
-                  style: TextStyle(color: widget.activeTitleColor, fontSize: _textSizeAnimation.value,),
+                  style: TextStyle(color: widget.activeTitleColor, fontSize: _textSizeAnimation.value, fontWeight: FontWeight.w500),
                 )],
               ),
             );

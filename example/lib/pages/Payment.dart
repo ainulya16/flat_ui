@@ -1,10 +1,11 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class Payment extends StatefulWidget {
   Payment({Key key, this.stepperController}) : super(key: key);
 
-  final StepperController stepperController;
+  final FUIStepperController stepperController;
 
   @override
   _PaymentState createState() => _PaymentState();
@@ -45,7 +46,7 @@ class _PaymentState extends State<Payment> {
                 label: 'Email',
                 allowNextFocus: true,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.mail_outline, color: TinyColor.fromString('#2980b9').color,),
                 hintText: 'john@doe.com',
                 borderRadius: 4,
                 borderColor: '#bdc3c7',
@@ -58,7 +59,7 @@ class _PaymentState extends State<Payment> {
                 label: 'Password',
                 allowNextFocus: false,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
                 obsecureText: true,
                 borderColor: '#bdc3c7',
@@ -72,7 +73,7 @@ class _PaymentState extends State<Payment> {
               child: FUIDateTimePicker(
                 label: 'Date of Birth',
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
               )
             ),

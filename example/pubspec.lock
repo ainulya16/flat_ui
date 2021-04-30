@@ -157,7 +157,7 @@ packages:
     source: hosted
     version: "0.2.19"
   tinycolor:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: tinycolor
       url: "https://pub.dartlang.org"

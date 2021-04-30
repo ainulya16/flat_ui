@@ -1,6 +1,7 @@
 import 'package:flat_ui/flat_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 void main() {
   runApp(MyApp());
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: 'Email',
                 allowNextFocus: true,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.mail_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.mail_outline, color: TinyColor.fromString('#2980b9').color,),
                 hintText: 'john@doe.com',
                 borderRadius: 4,
                 borderColor: '#bdc3c7',
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: 'Password',
                 allowNextFocus: false,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
                 obsecureText: true,
                 borderColor: '#bdc3c7',
@@ -101,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: 'Search',
                 clearable: true,
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.search, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.search, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
                 borderColor: '#bdc3c7',
               )
@@ -112,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 options: options,
                 label: 'Option list',
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
               )
             ),
@@ -122,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FUIDateTimePicker(
                 label: 'Date Picker',
                 borderType: FUIFieldBorderType.bordered,
-                prefix: Icon(Icons.lock_outline, color: HexColor('#2980b9'),),
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
                 borderRadius: 4,
               )
             ),

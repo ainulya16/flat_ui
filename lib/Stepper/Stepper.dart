@@ -42,7 +42,6 @@ class FUIStepper extends StatefulWidget {
 class _FUIStepperState extends State<FUIStepper> with TickerProviderStateMixin {
   int totalPage;
   int currentPage = 1;
-  AnimationController _titleAnimationController;
 
   @override
   void initState() {

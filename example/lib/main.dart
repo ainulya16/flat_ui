@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'OpenSans',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -33,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StepperController controller = new StepperController();
+  FUIStepperController controller = new FUIStepperController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page: Payment(stepperController: controller,));
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
+      
       body: SafeArea(
         child: FUIStepper(
           controller: controller,
