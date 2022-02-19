@@ -75,82 +75,11 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
   }
 
   openMenu() {
-    showDialog(
-        barrierColor: Colors.transparent,
-        context: context,
-        barrierDismissible: true,
-        builder: (ctx )=> Material(
-          type: MaterialType.transparency,
-          child: Center(
-            child: BackdropFilter(
-                filter: ui.ImageFilter.blur(
-                  sigmaX: 2,
-                  sigmaY: 2,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 40,
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            color: Colors.white,
-                            boxShadow: [boxShadow]),
-                        child: FUISearchField(
-                          label: 'Search',
-                          borderType: FUIFieldBorderType.none,
-                          prefix: Icon(
-                            Icons.search,
-                            color: TinyColor.fromString('#2980b9').color,
-                          ),
-                          borderRadius: 4,
-                          focusedBorderColor: widget.focusedBorderColor,
-                          borderColor: '#ffffff',
-                        ),
-                      ),
-                      Container(height: 30),
-                      Container(
-                        height: MediaQuery.of(context).size.width - 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            color: Colors.white,
-                            boxShadow: [boxShadow]),
-                        child: ListView.separated(
-                          padding: EdgeInsets.symmetric(vertical: 0),
-                          shrinkWrap: true,
-                          itemCount: widget.options.length,
-                          separatorBuilder: (ctx, i) => Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Container(
-                              height: 1,
-                            ),
-                          ),
-                          itemBuilder: (buildCtx, index) {
-                            var item = widget.options[index];
-                            return FUIButton(
-                              size: ButtonSize.full,
-                              buttonFullHeight: 50,
-                              text: item.label,
-                              textColor: '#000000',
-                              borderRadius: 0,
-                              textStyle: TextStyle(
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18),
-                              onPress: () => onSelect(item.value),
-                            );
-                            // return FlatButton(onPressed:()=>onSelect(item.value), child: Text(item.label,style: TextStyle(fontSize: 18, fontFamily: 'OpenSans'),));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-          ),
-        ));
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black12,
+      context: context,
+      builder: (ctx ) => BlurDropdownDialog(focusedBorderColor: widget.focusedBorderColor, options: widget.options)); 
   }
 
   closeMenu() {
@@ -192,3 +121,103 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
     );
   }
 }
+
+
+class BlurDropdownDialog extends StatefulWidget {
+  final String focusedBorderColor;
+
+  final List<OptionItem> options;
+  const BlurDropdownDialog({ Key key, this.focusedBorderColor = '#3498db', this.options }) : super(key: key);
+
+  @override
+  _BlurDropdownDialogState createState() => _BlurDropdownDialogState();
+}
+
+class _BlurDropdownDialogState extends State<BlurDropdownDialog> with SingleTickerProviderStateMixin {
+  ScrollController scrollController;
+  bool disableScroll = false;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    scrollController = new ScrollController();
+    scrollController.addListener(() {
+      if(scrollController.offset == 0) {
+        setState(() => disableScroll = true);
+        Future.delayed(Duration(seconds: 1), () => setState(() => disableScroll = false));
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: BackdropFilter(
+          filter: ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(7), topRight: Radius.circular(7)),
+            child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        Flexible(
+                          child: Container(
+                            color: Colors.white,
+                            child: ListView.separated(
+                              controller: scrollController,
+                              physics: disableScroll ? NeverScrollableScrollPhysics() : ClampingScrollPhysics(),
+                              padding: EdgeInsets.symmetric(vertical: 0),
+                              shrinkWrap: true,
+                              itemCount: widget.options.length,
+                              separatorBuilder: (ctx, i) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Container(
+                                  height: 1,
+                                ),
+                              ),
+                              itemBuilder: (buildCtx, index) {
+                                var item = widget.options[index];
+                                return FUIButton(
+                                  size: ButtonSize.full,
+                                  buttonFullHeight: 50,
+                                  text: item.label,
+                                  textColor: '#000000',
+                                  borderRadius: 0,
+                                  textStyle: TextStyle(
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
+                                  // onPress: () => onSelect(item.value),
+                                );
+                                // return FlatButton(onPressed:()=>onSelect(item.value), child: Text(item.label,style: TextStyle(fontSize: 18, fontFamily: 'OpenSans'),));
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+// Material(
+//           type: MaterialType.transparency,
+//           child: Center(
+//             child: BackdropFilter(
+//                 filter: ui.ImageFilter.blur(
+//                   sigmaX: 2,
+//                   sigmaY: 2,
+//                 ),
+//                 child: 
+//                 ),
+//           ),
+//         ));

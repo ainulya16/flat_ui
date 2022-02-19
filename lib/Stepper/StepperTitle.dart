@@ -87,16 +87,16 @@ class _FUIStepperTitleState extends State<FUIStepperTitle> with TickerProviderSt
         width: 25,
         padding: EdgeInsets.all(2),
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 2.0,
-                  offset: Offset(
-                    0.0,
-                    2.0,
-                  ),
-                  spreadRadius: -1)
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //       color: Colors.black38,
+            //       blurRadius: 2.0,
+            //       offset: Offset(
+            //         0.0,
+            //         2.0,
+            //       ),
+            //       spreadRadius: -1)
+            // ],
             borderRadius: BorderRadius.all(
               Radius.circular(200),
             ),

@@ -77,6 +77,16 @@ class _AccountState extends State<Account> {
                 borderRadius: 4,
               )
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 10),
+              child: FUIDropdownList(
+                options: options,
+                label: 'Date of Birth',
+                borderType: FUIFieldBorderType.bordered,
+                prefix: Icon(Icons.lock_outline, color: TinyColor.fromString('#2980b9').color,),
+                borderRadius: 4,
+              )
+            ),
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:30.0, vertical: 5),

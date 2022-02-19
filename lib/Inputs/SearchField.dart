@@ -61,7 +61,7 @@ class _FUISearchFieldState extends State<FUISearchField>{
   }
 
   onChanged(text) {
-    widget.onChanged(text);
+    if (widget.onChanged != null) widget.onChanged(text);
     print(text);
     setState(() {
       input = text;
