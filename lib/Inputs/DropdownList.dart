@@ -1,3 +1,4 @@
+import 'package:flat_ui/Styles/TextStyle.dart';
 import 'package:flat_ui/flat_ui.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -76,20 +77,18 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
 
   openMenu() {
     showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      barrierColor: Colors.black12,
-      context: context,
-      builder: (ctx ) => BlurDropdownDialog(focusedBorderColor: widget.focusedBorderColor, options: widget.options)); 
+        backgroundColor: Colors.transparent,
+        barrierColor: Colors.black12,
+        context: context,
+        builder: (ctx) => BlurDropdownDialog(
+            onSelect: onSelect,
+            focusedBorderColor: widget.focusedBorderColor,
+            options: widget.options));
   }
 
-  closeMenu() {
-    Navigator.pop(context);
-  }
-
-  onSelect(value) {
-    closeMenu();
-    _controller.text = value.toString();
-    widget.onChanged(value);
+  onSelect(OptionItem item) {
+    _controller.text = item.label.toString();
+    if(widget.onChanged != null) widget.onChanged(item.value);
   }
 
   @override
@@ -122,32 +121,40 @@ class _FUIDropdownListState extends State<FUIDropdownList> {
   }
 }
 
-
 class BlurDropdownDialog extends StatefulWidget {
   final String focusedBorderColor;
-
   final List<OptionItem> options;
-  const BlurDropdownDialog({ Key key, this.focusedBorderColor = '#3498db', this.options }) : super(key: key);
+  final Function onSelect;
+  const BlurDropdownDialog(
+      {Key key, this.focusedBorderColor = '#3498db', this.options, this.onSelect})
+      : super(key: key);
 
   @override
   _BlurDropdownDialogState createState() => _BlurDropdownDialogState();
 }
 
-class _BlurDropdownDialogState extends State<BlurDropdownDialog> with SingleTickerProviderStateMixin {
+class _BlurDropdownDialogState extends State<BlurDropdownDialog>
+    with SingleTickerProviderStateMixin {
   ScrollController scrollController;
   bool disableScroll = false;
 
   @override
   void initState() {
     super.initState();
-    
+
     scrollController = new ScrollController();
     scrollController.addListener(() {
-      if(scrollController.offset == 0) {
+      if (scrollController.offset == 0) {
         setState(() => disableScroll = true);
-        Future.delayed(Duration(seconds: 1), () => setState(() => disableScroll = false));
+        Future.delayed(
+            Duration(seconds: 1), () => setState(() => disableScroll = false));
       }
     });
+  }
+
+  void onSelect(OptionItem value) {
+    if(value != null && widget.onSelect != null) widget.onSelect(value); 
+    Navigator.pop(context);
   }
 
   @override
@@ -158,66 +165,61 @@ class _BlurDropdownDialogState extends State<BlurDropdownDialog> with SingleTick
         child: BackdropFilter(
           filter: ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(7), topRight: Radius.circular(7)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(7), topRight: Radius.circular(7)),
             child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        Flexible(
-                          child: Container(
-                            color: Colors.white,
-                            child: ListView.separated(
-                              controller: scrollController,
-                              physics: disableScroll ? NeverScrollableScrollPhysics() : ClampingScrollPhysics(),
-                              padding: EdgeInsets.symmetric(vertical: 0),
-                              shrinkWrap: true,
-                              itemCount: widget.options.length,
-                              separatorBuilder: (ctx, i) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20.0),
-                                child: Container(
-                                  height: 1,
-                                ),
-                              ),
-                              itemBuilder: (buildCtx, index) {
-                                var item = widget.options[index];
-                                return FUIButton(
-                                  size: ButtonSize.full,
-                                  buttonFullHeight: 50,
-                                  text: item.label,
-                                  textColor: '#000000',
-                                  borderRadius: 0,
-                                  textStyle: TextStyle(
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18),
-                                  // onPress: () => onSelect(item.value),
-                                );
-                                // return FlatButton(onPressed:()=>onSelect(item.value), child: Text(item.label,style: TextStyle(fontSize: 18, fontFamily: 'OpenSans'),));
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 20,
+                    child: Center(
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: TinyColor.fromString("#c4c4c4").color),
+                          height: 4,
+                          width: 30),
                     ),
                   ),
+                  Flexible(
+                    child: ListView.separated(
+                      controller: scrollController,
+                      physics: disableScroll
+                          ? NeverScrollableScrollPhysics()
+                          : ClampingScrollPhysics(),
+                      padding: EdgeInsets.symmetric(vertical: 0),
+                      shrinkWrap: true,
+                      itemCount: widget.options.length,
+                      separatorBuilder: (ctx, i) => Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 0),
+                        child: Container(
+                          height: 1,
+                          color: TinyColor.fromString("#c4c4c4").color,
+                        ),
+                      ),
+                      itemBuilder: (buildCtx, index) {
+                        var item = widget.options[index];
+                        return InkWell(
+                          onTap: () => onSelect(item),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 16),
+                            child: Text(item.label, style: defaultTextStyle),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  // ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
-// Material(
-//           type: MaterialType.transparency,
-//           child: Center(
-//             child: BackdropFilter(
-//                 filter: ui.ImageFilter.blur(
-//                   sigmaX: 2,
-//                   sigmaY: 2,
-//                 ),
-//                 child: 
-//                 ),
-//           ),
-//         ));
