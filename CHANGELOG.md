@@ -24,3 +24,7 @@
 ## [0.1.4] - TODO: Date Picker.
 
 * fix animation dispose.
+
+## [0.1.5] - TODO: Date Picker.
+
+* fix dropdown field.
